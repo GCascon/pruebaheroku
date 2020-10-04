@@ -33,7 +33,7 @@ public class IndexController {
 	public String mostrar(Model model) {
 		FiltroBusquedaDTO filtro=new FiltroBusquedaDTO();
 		model.addAttribute("filtro", filtro);
-		model.addAttribute("titulo", "Qué hay en ...");
+		model.addAttribute("titulo", "Qu&eacute; hay en ...");
 		request.getSession().setAttribute("filtro", filtro);
 		return "buscar";
 	}
