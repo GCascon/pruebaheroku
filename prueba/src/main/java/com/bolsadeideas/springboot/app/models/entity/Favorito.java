@@ -5,9 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,8 +20,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "clientes")
-public class Cliente implements Serializable {
+@Table(name = "favoritos")
+public class Favorito implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,61 +31,130 @@ public class Cliente implements Serializable {
 	private String nombre;
 	
 	@NotEmpty
-	private String apellido;
+	private String descripcion;
 	
 	@NotEmpty
-	@Email
-	private String email;
-
-	@NotNull
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date createAt;
-
+	private String direccion;
+	
+	@NotEmpty
+	private String url;	
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Lugar lugar;
+	
+	
+	private String tipo;
+		
 	public Long getId() {
 		return id;
 	}
+
+
+
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
+
+
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
+
+
+
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public String getEmail() {
-		return email;
+
+
+
+
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	public Date getCreateAt() {
-		return createAt;
+
+
+
+
+	public String getUrl() {
+		return url;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+
+
+
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+
+
+
+	public Lugar getLugar() {
+		return lugar;
 	}
+
+
+
+
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+
+
+
 
 	private static final long serialVersionUID = 1L;
 

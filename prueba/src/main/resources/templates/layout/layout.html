@@ -8,7 +8,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Spring Boot</a>
+			<a class="navbar-brand" href="#">Qu&eacute;Hay</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -16,10 +16,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
+					<li class="nav-item active"><a class="nav-link" th:href="@{/buscar}">Buscar
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/listar}">Clientes</a>
+					<li class="nav-item">						
+						<a th:if="${session.filtro.lugar !=null}" class="nav-link" th:href="@{/listar}">Resultado</a>
 					</li>
 				</ul>
 			</div>
@@ -41,9 +42,7 @@
 				Boot</a> y <a href="http://www.thymeleaf.org">Thymeleaf</a>.
 		</p>
 		<p>
-			Este proyecto fue desarrollado en IDE Eclipse + Spring Plugins (STS
-			Spring Tool), profesor Andrés Guzmán.<br /> &copy; Company 2017,
-			Inc. Todos los derechos reservados. Términos de uso y privacidad.<br />
+			&copy; Gcascon
 		</p>
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Bootstrap JS -->
