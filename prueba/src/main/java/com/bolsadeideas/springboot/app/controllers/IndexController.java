@@ -39,7 +39,7 @@ public class IndexController {
 	}
 	
 	@PostMapping("/buscar")
-	public String procesar(@Valid FiltroBusquedaDTO filtro, BindingResult result, Model model) {
+	public String procesar(@Valid @ModelAttribute("filtro") FiltroBusquedaDTO filtro, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Que hay en ...");

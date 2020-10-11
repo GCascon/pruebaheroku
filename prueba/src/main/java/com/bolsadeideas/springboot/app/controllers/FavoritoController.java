@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +52,7 @@ public class FavoritoController {
 		return "listar";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
 
@@ -61,6 +63,7 @@ public class FavoritoController {
 		return "form";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -82,6 +85,7 @@ public class FavoritoController {
 		return "form";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Favorito favorito, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status) {
 		if (result.hasErrors()) {
@@ -93,8 +97,8 @@ public class FavoritoController {
 		favorito.setLugar(filtro.getLugar());
 		favorito.setTipo(filtro.getTipo());
 		
-		String urlInicio="https://maps.google.com/maps?width=100%25&height=600&hl=es&q=";
-		String urlFin=",%20Spain+&t=&z=14&ie=UTF8&iwloc=B&output=embed";
+		String urlInicio="https://maps.google.com/maps?width=100%25&height=60%25&hl=es&q=";
+		String urlFin=",%20Spain+&t=&z=17&ie=UTF8&iwloc=B&output=embed";
 		String url=urlInicio+favorito.getDireccion().replaceAll(" ", "%20")+urlFin;
 		favorito.setUrl(url);		
 		
@@ -104,6 +108,7 @@ public class FavoritoController {
 		return "redirect:listar";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 

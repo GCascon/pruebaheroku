@@ -36,7 +36,6 @@ public class Favorito implements Serializable {
 	@NotEmpty
 	private String direccion;
 	
-	@NotEmpty
 	private String url;	
 	
 	
