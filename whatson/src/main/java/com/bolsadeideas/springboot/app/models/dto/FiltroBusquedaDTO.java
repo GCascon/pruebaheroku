@@ -11,6 +11,8 @@ public class FiltroBusquedaDTO {
 	@NotNull
 	private Lugar lugar;
 	
+	private String posicion;
+	
 	public String getTipo() {
 		return tipo;
 	}
@@ -22,5 +24,12 @@ public class FiltroBusquedaDTO {
 	}
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
-	}		
+	}
+	public String getPosicion() {
+		return posicion;
+	}
+	public void setPosicion(String posicion) {
+		this.posicion = posicion;
+	}
+	
 }

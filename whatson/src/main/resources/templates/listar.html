@@ -29,7 +29,8 @@
 					<tbody>
 						<tr th:each="favorito: ${favoritos}">							
 							<td th:text="${favorito.nombre}"></td>
-							<td th:text="${favorito.descripcion}"></td>						
+							<td th:if="${favorito.distancia != null}" th:text="${favorito.distancia}+' '+${favorito.descripcion}"></td>
+							<td th:if="${favorito.distancia == null}" th:text="${favorito.descripcion}"></td>						
 							<td><a class="btn btn-success btn-sm"
 								th:href="@{/ver/} + ${favorito.id}" th:text="'Ver'"></a></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm"

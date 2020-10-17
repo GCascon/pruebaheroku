@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.models.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -21,5 +22,7 @@ public interface IFavoritoService {
 	public Favorito findOne(Long id);
 	
 	public void delete(Long id);
+	
+	public Page<Favorito> findCercaDeMi(String tipo, String posicion);
 	
 }

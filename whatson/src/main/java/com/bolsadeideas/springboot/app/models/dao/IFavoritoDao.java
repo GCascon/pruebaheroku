@@ -13,4 +13,6 @@ public interface IFavoritoDao extends PagingAndSortingRepository<Favorito, Long>
 
 	@Query(value="Select f from Favorito f where f.tipo=?1 and f.lugar.id=?2")
 	public Page<Favorito> findByTipoAndLugarId(Pageable page, String tipo, Long idLugar);
+	
+	public List<Favorito> findByTipo(String tipo);
 }

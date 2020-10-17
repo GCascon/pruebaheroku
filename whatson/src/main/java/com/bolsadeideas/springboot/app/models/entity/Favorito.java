@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,129 +30,108 @@ public class Favorito implements Serializable {
 
 	@NotEmpty
 	private String nombre;
-	
+
 	@NotEmpty
 	private String descripcion;
-	
+
 	@NotEmpty
 	private String direccion;
+
+	private String url;
+
+	private Double latitud;
+
+	private Double longitud;
 	
-	private String url;	
-	
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@Transient
+	private String distancia;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Lugar lugar;
-	
-	
+
 	private String tipo;
-		
+
 	public Long getId() {
 		return id;
 	}
-
-
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
-
-
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-
-
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
-
-
-
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
-
-
-
 	public String getDireccion() {
 		return direccion;
 	}
-
-
-
-
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-
-
-
-
 	public String getUrl() {
 		return url;
 	}
-
-
-
-
 
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-
-
-
-
 	public Lugar getLugar() {
 		return lugar;
 	}
 
-
-
-
-
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-	
+
 	public String getTipo() {
 		return tipo;
 	}
-
-
-
-
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
+	public Double getLatitud() {
+		return latitud;
+	}
 
+	public void setLatitud(Double latitud) {
+		this.latitud = latitud;
+	}
 
+	public Double getLongitud() {
+		return longitud;
+	}
 
+	public void setLongitud(Double longitud) {
+		this.longitud = longitud;
+	}
+	
+	
+
+	public String getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(String distancia) {
+		this.distancia = distancia;
+	}
 
 
 

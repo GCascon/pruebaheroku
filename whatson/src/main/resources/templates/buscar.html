@@ -11,8 +11,9 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 
-				
+
 				<form th:action="@{/buscar}" th:object="${filtro}" method="post">
+					<input type="hidden" id="posicion" th:field="*{posicion}" />
 					<div class="form-group row">
 						<label for="lugar" class="col-form-label col-sm-2">Lugar</label>
 						<div class="col-sm-4">
@@ -30,8 +31,8 @@
 						<div class="col-sm-4">
 							<select id="tipo" th:field="*{tipo}" class="form-control">
 								<option value="">-- Seleccionar --</option>
-								<option th:each="tipo: ${tipos}"
-									th:text="${tipo}" th:value="${tipo}"></option>
+								<option th:each="tipo: ${tipos}" th:text="${tipo}"
+									th:value="${tipo}"></option>
 							</select>
 						</div>
 						<div th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"
@@ -48,5 +49,41 @@
 		</div>
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
+	<script type="text/javascript">
+		(function() {			
+			if (navigator.geolocation) {
+				navigator.geolocation
+						.getCurrentPosition(
+								function(objPosition) {
+									var lon = objPosition.coords.longitude;
+									var lat = objPosition.coords.latitude;
+									
+									document.getElementById("posicion").value = lat
+											+ "," + lon;
+
+								},
+								function(objPositionError) {
+									switch (objPositionError.code) {
+									case objPositionError.PERMISSION_DENIED:
+										console.error("No se ha permitido el acceso a la posición del usuario.");
+										break;
+									case objPositionError.POSITION_UNAVAILABLE:
+										console.error("No se ha podido acceder a la información de su posición.");
+										break;
+									case objPositionError.TIMEOUT:
+										console.error("El servicio ha tardado demasiado tiempo en responder.");
+										break;
+									default:
+										console.error("Error desconocido.");
+									}
+								}, {
+									maximumAge : 75000,
+									timeout : 15000
+								});
+			} else {
+				console.error("Su navegador no soporta la API de geolocalización.");
+			}
+		})();
+	</script>
 </body>
 </html>

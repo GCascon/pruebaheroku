@@ -45,7 +45,13 @@ public class FavoritoController {
 		if(filtro==null) {
 			return "redirect:/buscar";
 		}
-		Page<Favorito> favoritos = favoritoService.findByTipoAndLugarId(pageRequest, filtro.getTipo(), filtro.getLugar().getId());
+		Page<Favorito> favoritos = null;
+		if(filtro.getLugar().getId()==0L) {
+			favoritos=favoritoService.findCercaDeMi(filtro.getTipo(), filtro.getPosicion());
+		}else {
+			favoritos=favoritoService.findByTipoAndLugarId(pageRequest, filtro.getTipo(), filtro.getLugar().getId());
+		}
+				
 		
 		
 		PageRender<Favorito> pageRender = new PageRender<Favorito>("/listar", favoritos);
