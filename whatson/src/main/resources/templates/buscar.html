@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				
+				<form th:action="@{/buscar}" th:object="${filtro}" method="post">
+					<div class="form-group row">
+						<label for="lugar" class="col-form-label col-sm-2">Lugar</label>
+						<div class="col-sm-4">
+							<select id="lugar" th:field="*{lugar}" class="form-control">
+								<option value="">-- Seleccionar --</option>
+								<option th:each="lugar: ${listaLugares}"
+									th:text="${lugar.nombre}" th:value="${lugar.id}"></option>
+							</select>
+						</div>
+						<div th:if="${#fields.hasErrors('lugar')}" th:errors="*{lugar}"
+							class="alert alert-danger"></div>
+					</div>
+					<div class="form-group row">
+						<label class="col-form-label col-sm-2">Tipo</label>
+						<div class="col-sm-4">
+							<select id="tipo" th:field="*{tipo}" class="form-control">
+								<option value="">-- Seleccionar --</option>
+								<option th:each="tipo: ${tipos}"
+									th:text="${tipo}" th:value="${tipo}"></option>
+							</select>
+						</div>
+						<div th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"
+							class="alert alert-danger"></div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Buscar" class="btn btn-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
