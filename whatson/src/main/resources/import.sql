@@ -12,3 +12,10 @@ INSERT INTO `users` (username, password, enabled) VALUES ('admin','$2a$10$ocQSHo
 
 INSERT INTO `authorities` (user_id, authority) VALUES (1,'ROLE_USER');
 INSERT INTO `authorities` (user_id, authority) VALUES (1,'ROLE_ADMIN');
+
+ 
+
+INSERT INTO favoritos (descripcion, direccion, nombre, tipo, url, lugar_id, latitud, longitud) VALUES('Plaza Mayor de Madrid', 'Plaza Mayor, Madrid', 'Plaza Mayor', 'Turismo','-', 1, '40.415509', '-3.707431');
+INSERT INTO favoritos (descripcion, direccion, nombre, tipo, url, lugar_id, latitud, longitud) VALUES('Puerta del Sol ', 'Puerta del Sol, madrid', 'Puerta del Sol', 'Turismo','-', 1, '40.41692', '-3.703519');
+INSERT INTO favoritos (descripcion, direccion, nombre, tipo, url, lugar_id, latitud, longitud) VALUES('Parque del Retiro', 'Parque del Retiro, Madrid', 'Parque del Retiro', 'Turismo','-', 1, '40.415122', '-3.683877');
+INSERT INTO favoritos (descripcion, direccion, nombre, tipo, url, lugar_id, latitud, longitud) VALUES('Templo de Debod', 'Templo de Debod, Madrid', 'Templo de Debod', 'Turismo','-', 1, '40.424006', '-3.717797');

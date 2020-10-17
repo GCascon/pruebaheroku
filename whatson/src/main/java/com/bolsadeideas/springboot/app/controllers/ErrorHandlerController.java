@@ -12,10 +12,12 @@ public class ErrorHandlerController {
 
 	@ExceptionHandler(Exception.class)
 	public String aritmeticaError(Exception ex, Model model) {
-		model.addAttribute("error", "Ups! Se ha producido un en la aplicación :-(");
+		model.addAttribute("error", "Ups! Se ha producido un error en la aplicación :-(");
 		model.addAttribute("message", ex.getMessage());
 		model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
 		model.addAttribute("timestamp", new Date());
+		ex.printStackTrace();
+	
 		return "error/generica";
 	}
 	
