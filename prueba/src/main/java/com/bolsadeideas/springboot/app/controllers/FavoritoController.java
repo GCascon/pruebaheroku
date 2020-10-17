@@ -41,9 +41,12 @@ public class FavoritoController {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
 		FiltroBusquedaDTO filtro=(FiltroBusquedaDTO)request.getSession().getAttribute("filtro");
-				
+		
+		if(filtro==null) {
+			return "redirect:/buscar";
+		}
 		Page<Favorito> favoritos = favoritoService.findByTipoAndLugarId(pageRequest, filtro.getTipo(), filtro.getLugar().getId());
-		//Page<Favorito> favoritos = favoritoService.findAll(pageRequest);
+		
 		
 		PageRender<Favorito> pageRender = new PageRender<Favorito>("/listar", favoritos);
 		model.addAttribute("titulo", "Resultados"+" ["+filtro.getLugar().getNombre()+"-"+filtro.getTipo()+"]");

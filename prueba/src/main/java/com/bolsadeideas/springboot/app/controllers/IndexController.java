@@ -33,7 +33,7 @@ public class IndexController {
 	public String mostrar(Model model) {
 		FiltroBusquedaDTO filtro=new FiltroBusquedaDTO();
 		model.addAttribute("filtro", filtro);
-		model.addAttribute("titulo", "What's Up In ...");
+		model.addAttribute("titulo", "Selecciona ...");
 		request.getSession().setAttribute("filtro", filtro);
 		return "buscar";
 	}
@@ -42,7 +42,7 @@ public class IndexController {
 	public String procesar(@Valid @ModelAttribute("filtro") FiltroBusquedaDTO filtro, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			model.addAttribute("titulo", "Que hay en ...");
+			model.addAttribute("titulo", "Selecciona ...");
 			model.addAttribute("filtro", filtro);
 			return "buscar";
 		}
