@@ -8,14 +8,14 @@
 	<div class="container py-4">
 
 		<div class="card border-primary text-center">
-			<div class="card-header">Sign In!</div>
+			<div class="card-header">Log In!</div>
 			<div class="card-body">
 
 				<form th:action="@{/login}" method="post">
 
 					<div class="form-group col-sm-6">
 						<input type="text" name="username" id="username"
-							class="form-control" placeholder="UserName" autofocus required />
+							class="form-control" placeholder="Usuario" autofocus required />
 					</div>
 
 					<div class="form-group col-sm-6">
@@ -25,7 +25,7 @@
 
 					<div class="form-group col-sm-6">
 						<input type="submit" class="btn btn-lg btn-primary btn-block"
-							value="Sign In" />
+							value="Log In" />
 					</div>
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
