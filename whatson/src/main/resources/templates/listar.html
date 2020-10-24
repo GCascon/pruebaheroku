@@ -18,7 +18,8 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
-						<tr>							
+						<tr>
+							<th>Foto</th>							
 							<th>Nombre</th>
 							<th>Descripci&oacute;n</th>
 							<th width="5%">Ver</th>
@@ -27,7 +28,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="favorito: ${favoritos}">							
+						<tr th:each="favorito: ${favoritos}">		
+							<td>
+							<img class="img-thumbnail rounded float-left" th:src="@{'/fotos/' + ${favorito.id}}" th:alt="Foto" />
+							</td>					
 							<td th:text="${favorito.nombre}"></td>
 							<td th:if="${favorito.distancia != null}" th:text="${favorito.distancia}+' '+${favorito.descripcion}"></td>
 							<td th:if="${favorito.distancia == null}" th:text="${favorito.descripcion}"></td>						

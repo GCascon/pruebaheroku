@@ -1,28 +1,39 @@
 package com.bolsadeideas.springboot.app.controllers;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bolsadeideas.springboot.app.models.dto.FiltroBusquedaDTO;
 import com.bolsadeideas.springboot.app.models.entity.Favorito;
+import com.bolsadeideas.springboot.app.models.entity.Imagen;
 import com.bolsadeideas.springboot.app.models.service.IFavoritoService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
@@ -96,11 +107,12 @@ public class FavoritoController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
-	public String guardar(@Valid Favorito favorito, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status) {
+	public String guardar(@Valid Favorito favorito, @RequestParam("file") MultipartFile foto, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status) throws IOException {
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de BookMark");
 			return "form";
 		}
+		
 		String mensajeFlash = (favorito.getId() != null) ? "Bookmark editado con exito!" : "Bookmark creado con exito!";
 		FiltroBusquedaDTO filtro=(FiltroBusquedaDTO)request.getSession().getAttribute("filtro");
 		favorito.setLugar(filtro.getLugar());
@@ -109,12 +121,36 @@ public class FavoritoController {
 		String urlInicio="https://maps.google.com/maps?width=100%25&height=60%25&hl=es&q=";
 		String urlFin=",%20Spain+&t=&z=17&ie=UTF8&iwloc=B&output=embed";
 		String url=urlInicio+favorito.getDireccion().replaceAll(" ", "%20")+urlFin;
-		favorito.setUrl(url);		
+		favorito.setUrl(url);
 		
-		favoritoService.save(favorito);
+		List<Imagen> imagenes=new ArrayList();
+		if(foto!=null) {
+			Imagen img=new Imagen();
+			img.setFavorito(favorito);
+			img.setNombre(foto.getName());
+			img.setFichero(foto.getBytes());
+			imagenes.add(img);
+		}
+		
+		favoritoService.save(favorito, imagenes);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:listar";
+	}
+	
+	@GetMapping(value = "/fotos/{idFavorito}")
+	public ResponseEntity<byte[]> verFoto(@PathVariable Long idFavorito) {
+
+		Favorito f = favoritoService.findOne(idFavorito);
+		if(f.getImagenes()!=null && f.getImagenes().size()>0) {
+			Imagen img=f.getImagenes().get(0);			
+			return ResponseEntity.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + img.getNombre() + "\"")
+					.body(img.getFichero());
+		}else {
+			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
+		}
+		
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

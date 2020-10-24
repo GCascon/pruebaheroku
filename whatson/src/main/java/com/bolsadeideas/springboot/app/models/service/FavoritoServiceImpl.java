@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bolsadeideas.springboot.app.models.dao.IFavoritoDao;
 import com.bolsadeideas.springboot.app.models.entity.Favorito;
+import com.bolsadeideas.springboot.app.models.entity.Imagen;
 import com.bolsadeideas.springboot.app.util.DistanceCalculator;
 
 @Service
@@ -62,9 +63,16 @@ public class FavoritoServiceImpl implements IFavoritoService {
 	}
 
 	@Transactional
-	public void save(Favorito cliente) {
-		favoritoDao.save(cliente);
-		
+	public void save(Favorito favorito, List<Imagen> imagenes) {
+		Favorito f=favoritoDao.save(favorito);
+		if(imagenes!=null && imagenes.size()>0) {			
+			if(f.getImagenes()==null) {
+				f.setImagenes(imagenes);
+			}else {
+				f.getImagenes().addAll(imagenes);
+			}			
+			favoritoDao.save(f);
+		}				
 	}
 
 	@Transactional(readOnly = true)

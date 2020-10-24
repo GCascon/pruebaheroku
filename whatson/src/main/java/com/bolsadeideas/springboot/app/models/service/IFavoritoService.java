@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bolsadeideas.springboot.app.models.entity.Favorito;
+import com.bolsadeideas.springboot.app.models.entity.Imagen;
 
 public interface IFavoritoService {
 	
@@ -17,7 +18,7 @@ public interface IFavoritoService {
 	
 	public Page<Favorito> findByTipoAndLugarId(Pageable pageable, String tipo, Long idLugar);
 
-	public void save(Favorito cliente);
+	public void save(Favorito cliente, List<Imagen> imagenes);
 	
 	public Favorito findOne(Long id);
 	
