@@ -20,4 +20,6 @@ public interface ILugarService {
 	
 	public void delete(Long id);
 	
+	public List<Lugar> findAllByOrderByIdAsc();
+	
 }

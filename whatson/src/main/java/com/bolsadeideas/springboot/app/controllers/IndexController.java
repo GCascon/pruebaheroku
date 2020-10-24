@@ -53,7 +53,7 @@ public class IndexController {
 	
 	@ModelAttribute("listaLugares")
 	public List<Lugar> listaLugares() {
-		return lugarService.findAll();
+		return lugarService.findAllByOrderByIdAsc();
 	}
 	
 	@ModelAttribute("tipos")

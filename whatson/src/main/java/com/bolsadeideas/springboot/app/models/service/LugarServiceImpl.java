@@ -24,6 +24,7 @@ public class LugarServiceImpl implements ILugarService {
 		return (List<Lugar>) lugarDao.findAll();
 	}
 	
+		
 	@Transactional(readOnly = true)
 	public Page<Lugar> findAll(Pageable pageable) {
 		return lugarDao.findAll(pageable);
@@ -44,6 +45,11 @@ public class LugarServiceImpl implements ILugarService {
 	public void delete(Long id) {
 		lugarDao.deleteById(id);
 		
+	}
+
+	@Transactional(readOnly = true)
+	public List<Lugar> findAllByOrderByIdAsc() {
+		return (List<Lugar>) lugarDao.findAllByOrderByIdAsc();
 	}
 	
 }
