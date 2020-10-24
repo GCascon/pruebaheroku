@@ -57,7 +57,7 @@ public class Favorito implements Serializable {
 	private String tipo;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "imagene_id")
+	@JoinColumn(name = "id")
 	private List<Imagen> imagenes;
 
 	public List<Imagen> getImagenes() {
