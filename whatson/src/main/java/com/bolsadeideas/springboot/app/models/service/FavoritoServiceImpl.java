@@ -64,6 +64,7 @@ public class FavoritoServiceImpl implements IFavoritoService {
 
 	@Transactional
 	public void save(Favorito favorito, List<Imagen> imagenes) {		
+		
 		Favorito f=favoritoDao.save(favorito);
 		if(imagenes!=null && imagenes.size()>0) {
 			if(f.getImagenes()==null) {

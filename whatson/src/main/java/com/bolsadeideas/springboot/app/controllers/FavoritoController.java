@@ -124,7 +124,7 @@ public class FavoritoController {
 		favorito.setUrl(url);
 		
 		List<Imagen> imagenes=new ArrayList();
-		if(foto!=null) {
+		if(foto!=null && foto.getBytes()!=null && foto.getBytes().length>0) {
 			Imagen img=new Imagen();
 			img.setFavorito(favorito);
 			img.setNombre(foto.getName());
