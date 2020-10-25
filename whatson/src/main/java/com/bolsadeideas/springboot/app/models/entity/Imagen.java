@@ -23,7 +23,8 @@ public class Imagen implements Serializable{
 	private Long id;
 	
 	private String nombre;
-		
+	
+	//@Lob
     @Column(name = "fichero")
     private byte[] fichero;
 	

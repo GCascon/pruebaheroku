@@ -50,7 +50,7 @@ public class FavoritoController {
 	public String listar(@RequestParam(name="page",defaultValue="0")	
 	 int page, Model model) {
 		
-		Pageable pageRequest = PageRequest.of(page, 4);
+		Pageable pageRequest = PageRequest.of(page, 6);
 		FiltroBusquedaDTO filtro=(FiltroBusquedaDTO)request.getSession().getAttribute("filtro");
 		
 		if(filtro==null) {
@@ -66,7 +66,7 @@ public class FavoritoController {
 		
 		
 		PageRender<Favorito> pageRender = new PageRender<Favorito>("/listar", favoritos);
-		model.addAttribute("titulo", "Resultados"+" ["+filtro.getLugar().getNombre()+"-"+filtro.getTipo()+"]");
+		model.addAttribute("titulo", "Resultados: "+filtro.getLugar().getNombre()+" - "+filtro.getTipo());
 		model.addAttribute("favoritos", favoritos);
 		model.addAttribute("page", pageRender);
 		return "listar";

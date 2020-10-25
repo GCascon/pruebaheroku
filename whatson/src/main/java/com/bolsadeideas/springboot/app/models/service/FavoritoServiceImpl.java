@@ -50,7 +50,7 @@ public class FavoritoServiceImpl implements IFavoritoService {
 				Double latitud=Double.parseDouble(sb.nextToken());
 				Double longitud=Double.parseDouble(sb.nextToken());
 				double distancia=DistanceCalculator.distance(latitud,longitud,f.getLatitud(),f.getLongitud(),'K');
-				f.setDistancia("["+String.format("%.3f", distancia)+" Km]");
+				f.setDistancia(String.format("%.3f", distancia)+" Km");
 				
 				if(distancia < 10.0D) {
 					map.put(distancia, f);
