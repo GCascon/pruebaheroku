@@ -66,7 +66,12 @@ public class FavoritoServiceImpl implements IFavoritoService {
 	public void save(Favorito favorito, List<Imagen> imagenes) {
 		Favorito f=favoritoDao.save(favorito);
 		if(imagenes!=null && imagenes.size()>0) {			
-			f.setImagenes(imagenes);		
+			if(f.getImagenes()==null) {
+				f.setImagenes(imagenes);
+			}else {
+				f.getImagenes().clear();
+				f.getImagenes().addAll(imagenes);
+			}			
 			favoritoDao.save(f);
 		}				
 	}
