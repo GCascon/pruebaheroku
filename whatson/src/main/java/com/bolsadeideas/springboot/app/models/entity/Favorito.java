@@ -56,8 +56,8 @@ public class Favorito implements Serializable {
 
 	private String tipo;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "favorito_id")
 	private List<Imagen> imagenes;
 
 	public List<Imagen> getImagenes() {
@@ -149,6 +149,97 @@ public class Favorito implements Serializable {
 	public void setDistancia(String distancia) {
 		this.distancia = distancia;
 	}
+	
+	
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((distancia == null) ? 0 : distancia.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((imagenes == null || imagenes.isEmpty()) ? 0 : imagenes.hashCode());
+		result = prime * result + ((latitud == null) ? 0 : latitud.hashCode());
+		result = prime * result + ((longitud == null) ? 0 : longitud.hashCode());
+		result = prime * result + ((lugar == null) ? 0 : lugar.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Favorito other = (Favorito) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (distancia == null) {
+			if (other.distancia != null)
+				return false;
+		} else if (!distancia.equals(other.distancia))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (imagenes == null) {
+			if (other.imagenes != null)
+				return false;
+		} else if (!imagenes.equals(other.imagenes))
+			return false;
+		if (latitud == null) {
+			if (other.latitud != null)
+				return false;
+		} else if (!latitud.equals(other.latitud))
+			return false;
+		if (longitud == null) {
+			if (other.longitud != null)
+				return false;
+		} else if (!longitud.equals(other.longitud))
+			return false;
+		if (lugar == null) {
+			if (other.lugar != null)
+				return false;
+		} else if (!lugar.equals(other.lugar))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
+
+
 
 
 
