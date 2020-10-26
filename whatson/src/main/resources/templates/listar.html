@@ -16,7 +16,7 @@
 
 	<div class="album py-5 bg-light">
 		<div class="container">			
-			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-outline-secondary">Crear BookMark</a>
+			<a th:if="${session.filtro.lugar.id > 0}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-outline-secondary">Crear BookMark</a>
 			<p class="py-2"></p>
 			<div class="row">
 				<div th:each="favorito: ${favoritos}" class="col-md-4">
@@ -32,9 +32,11 @@
 								<div class="btn-group">
 									<a th:href="@{/ver/} + ${favorito.id}"
 										class="btn btn-sm btn-outline-secondary">Ver</a> <a
+										th:if="${session.filtro.lugar.id > 0}"
 										sec:authorize="hasRole('ROLE_ADMIN')"
 										th:href="@{/form/} + ${favorito.id}"
 										class="btn btn-sm btn-outline-secondary">Editar</a> <a
+										th:if="${session.filtro.lugar.id > 0}"
 										sec:authorize="hasRole('ROLE_ADMIN')"
 										th:href="@{/eliminar/} + ${favorito.id}"
 										class="btn btn-sm btn-outline-secondary"
