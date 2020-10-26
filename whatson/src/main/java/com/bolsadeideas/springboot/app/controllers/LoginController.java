@@ -26,11 +26,11 @@ public class LoginController {
 		}
 		
 		if(logout != null) {
-			model.addAttribute("success", "Ha cerrado sesion con exito!");
-			model.addAttribute("titulo","Log Out");
-		}else {
-			model.addAttribute("titulo","Log In");
+			model.addAttribute("success", "Ha cerrado sesion con exito!");			
 		}
+		
+		model.addAttribute("titulo","Log In");
+		
 		
 		return "login";
 	}
