@@ -35,6 +35,7 @@ import com.bolsadeideas.springboot.app.models.dto.FiltroBusquedaDTO;
 import com.bolsadeideas.springboot.app.models.entity.Favorito;
 import com.bolsadeideas.springboot.app.models.entity.Imagen;
 import com.bolsadeideas.springboot.app.models.service.IFavoritoService;
+import com.bolsadeideas.springboot.app.util.ImageUtils;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
 @Controller
@@ -45,6 +46,8 @@ public class FavoritoController {
 
 	@Autowired
 	private IFavoritoService favoritoService;
+	
+	private static long IMG_RESIZE_LIMIT=1048576;
 
 	@RequestMapping(value = {"/listar"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name="page",defaultValue="0")	
@@ -127,8 +130,12 @@ public class FavoritoController {
 		if(foto!=null && foto.getBytes()!=null && foto.getBytes().length>0) {
 			Imagen img=new Imagen();
 			img.setFavorito(favorito);
-			img.setNombre(foto.getName());
-			img.setFichero(foto.getBytes());
+			img.setNombre(foto.getOriginalFilename());
+			if(foto.getSize()>IMG_RESIZE_LIMIT 
+					&& foto.getOriginalFilename().toUpperCase().endsWith("JPG")) {
+				img.setFichero(ImageUtils.resizeImage(foto.getBytes(), 1024, 768));
+			}
+			else img.setFichero(foto.getBytes());
 			imagenes.add(img);
 		}
 		

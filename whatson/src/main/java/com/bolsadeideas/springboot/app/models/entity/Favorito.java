@@ -56,7 +56,7 @@ public class Favorito implements Serializable {
 
 	private String tipo;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)//, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "favorito_id")
 	private List<Imagen> imagenes;
 
